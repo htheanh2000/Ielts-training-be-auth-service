@@ -1,67 +1,20 @@
+# Project Title: Backend Authentication Service
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Key features and technologies of our service include:
 
-## Installation
+-   NestJS Framework: Leveraging the powerful features of NestJS for a well-structured and maintainable codebase.
+-   JWT Authentication: Implementing JSON Web Token (JWT) based authentication for secure and stateless user authentication.
+-   Passport.js Integration: Supporting multiple authentication methods including local username-password strategy and OAuth integrations with platforms like Google and Facebook.
+-   ORMs with Sequelize and TypeORM: Facilitating database operations with robust ORM support, catering to preferences for either Sequelize or TypeORM.
+-   Security Enhancements: Utilizing bcrypt for password hashing to protect user credentials effectively.
+-   Swagger Documentation: Including well-documented API endpoints for easy integration and understanding, using Swagger.
+-   Data Validation and Transformation: Employing class-validator and class-transformer for declarative and concise data handling.
+-   Reactive Programming: Handling asynchronous events and data streams efficiently with RxJS.
 
-```bash
-$ yarn install
-```
+## Features
 
-## Running the app
+List the key features of your authentication service, such as:
 
-```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
-
-## Folder Structure
-src/
-|-- config/                 # Configuration files
-|-- user/                   # User module
-    |-- dto/                # Data Transfer Objects
-        |-- create-user.dto.ts
-    |-- entities/           # Database entities
-        |-- user.entity.ts
-    |-- services/           # Business logic
-        |-- user.service.ts
-    |-- controllers/        # Route controllers
-        |-- user.controller.ts
-|-- auth/                   # Authentication module
-|-- common/                 # Common utilities, middleware, etc.
-|-- app.module.ts           # Main application module
-|-- main.ts                 # Application entry point
+-   User registration and login
