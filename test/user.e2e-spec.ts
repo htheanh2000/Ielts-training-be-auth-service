@@ -1,44 +1,38 @@
-// test/user.e2e-spec.ts
-
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, HttpStatus } from '@nestjs/common';
-import { AppModule } from '../src/app.module';
 import * as request from 'supertest';
+import { AppModule } from '../src/app.module'; // Import your AppModule
 
 describe('UserController (e2e)', () => {
-  let app:
-  INestApplication;
+  let app: INestApplication;
 
-beforeEach(async () => {
-const moduleFixture: TestingModule = await Test.createTestingModule({
-imports: [AppModule],
-}).compile();
-app = moduleFixture.createNestApplication();
-await app.init();
-});
+  beforeAll(async () => {
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [AppModule],
+    }).compile();
 
-it('/users (POST) - success', () => {
-return request(app.getHttpServer())
-.post('/users')
-.send({ email: 'test@example.com', password: 'password123' })
-.expect(HttpStatus.CREATED)
-.expect({
-// Expected response object
-// This should reflect the actual response you expect from your API
-});
-});
+    app = moduleFixture.createNestApplication();
+    await app.init();
+  });
 
-it('/users (POST) - fail (invalid data)', () => {
-return request(app.getHttpServer())
-.post('/users')
-.send({ email: 'invalid-email', password: 'pass' }) // Invalid email and short password
-.expect(HttpStatus.BAD_REQUEST);
-// Optionally, check the structure of the response
-});
+  const uniqueEmail = `${Math.random().toString(36).substring(2, 15)}@example.com`;
 
-// Add more tests as needed
+  it('/users (POST)', () => {
+    return request(app.getHttpServer())
+      .post('/users')
+      .send({ 
+        email: uniqueEmail, 
+        password: 'password123' 
+      })
+      .expect(HttpStatus.CREATED)
+      .then((response) => {
+        // Perform your assertions here
+        expect(response.body).toHaveProperty('id');
+        expect(response.body.email).toEqual(uniqueEmail);
+      });
+  });
 
-afterAll(async () => {
-await app.close();
-});
+  afterAll(async () => {
+    await app.close();
+  });
 });

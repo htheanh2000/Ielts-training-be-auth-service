@@ -15,10 +15,18 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  it('/health (GET)', () => {
     return request(app.getHttpServer())
-      .get('/')
+      .get('/health')
       .expect(200)
-      .expect('Hello World!');
+      .then((response) => {
+        // Assuming your health check returns a JSON object with a 'status' key
+        expect(response.body.status).toEqual('ok');
+        
+        // Additional assertions can be made based on the structure of your health check response
+        // For example, if you're checking the health of your database:
+        // expect(response.body.info.db.status).toEqual('up');
+      });
   });
+  
 });

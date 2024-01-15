@@ -1,12 +1,23 @@
 // src/dto/update-user.dto.ts
 
 import { IsEmail, IsOptional, IsString, MinLength } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateUserDto {
+
+  @ApiProperty({
+    example: 'user@example.com',
+    description: 'The email of the user',
+  })
   @IsOptional()
   @IsEmail()
   readonly email?: string;
 
+  @ApiProperty({
+    example: 'strongPassword123',
+    description: 'The password for the account',
+    minLength: 6
+  })
   @IsOptional()
   @IsString()
   @MinLength(6)

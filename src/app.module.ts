@@ -1,7 +1,10 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UserModule } from './user/user.module';
+import { HealthModule } from './health/health.module';
 import { User } from './user/entities/user.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -19,6 +22,7 @@ dotenv.config();
       synchronize: true, // Synchronize models with database
     }),
     UserModule,
+    HealthModule,
     // ... other modules
   ],
   controllers: [],
