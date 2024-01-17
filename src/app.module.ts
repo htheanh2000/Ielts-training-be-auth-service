@@ -4,6 +4,7 @@ import { UserModule } from './user/user.module';
 import { HealthModule } from './health/health.module';
 import { User } from './user/entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './auth/auth.module';
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -23,6 +24,7 @@ dotenv.config();
     }),
     UserModule,
     HealthModule,
+    AuthModule,
     // ... other modules
   ],
   controllers: [],

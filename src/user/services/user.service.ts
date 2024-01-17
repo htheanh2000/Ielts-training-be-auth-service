@@ -58,8 +58,33 @@ export class UserService {
 
   // List all users (optional)
   async findAll(): Promise<User[]> {
-    return await User.find();
+    return await User.findAll();
   }
-  
+
+  // Find or create a user based on the provider's data
+  async findOrCreateByProvider(providerId: string, provider: string, email: string, firstname:string, lastName: string): Promise<User> {
+    let user = await User.findOne({ where: { providerId, provider } });
+
+    if (!user) {
+      user = new User();
+      user.providerId = providerId;
+      user.provider = provider;
+      user.email = email;
+      user.firstname = firstname;
+      user.lastname = lastName;
+      await user.save();
+    }
+
+    return user;
+  }
+
+  // Find a user by provider ID
+  async findOneByProviderId(providerId: string, provider: string): Promise<User> {
+    const user = await User.findOne({ where: { providerId, provider } });
+    if (!user) {
+      throw new NotFoundException(`User with provider ID ${providerId} and provider ${provider} not found`);
+    }
+    return user;
+  }
   // Additional methods like 'findOne', 'update', etc., can be implemented here.
 }

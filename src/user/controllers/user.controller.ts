@@ -1,6 +1,7 @@
 // src/user/controllers/user.controller.ts
 
-import { Body, Controller, Post, Get, Put, Delete, Param, HttpCode, HttpStatus } from '@nestjs/common';
+import { Body, Controller, Post, Get, Put, Delete, Param, HttpCode, HttpStatus, Req, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto'; // Ensure this DTO is created
 import { UserService } from '../services/user.service';
@@ -51,6 +52,5 @@ export class UserController {
   async remove(@Param('id') id: number): Promise<void> {
     return this.userService.remove(id);
   }
-
   // Additional endpoints like 'findAll' can be added here if necessary.
 }
