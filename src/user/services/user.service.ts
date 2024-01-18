@@ -82,7 +82,9 @@ export class UserService {
   async findOneByProviderId(providerId: string, provider: string): Promise<User> {
     const user = await User.findOne({ where: { providerId, provider } });
     if (!user) {
-      throw new NotFoundException(`User with provider ID ${providerId} and provider ${provider} not found`);
+      console.log(`User with provider ID ${providerId} and provider ${provider} not found`);
+      return null ;
+      // throw new NotFoundException(`User with provider ID ${providerId} and provider ${provider} not found`);
     }
     return user;
   }

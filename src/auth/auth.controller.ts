@@ -1,9 +1,10 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { TokenDto } from './token.dto'; // Import the TokenDto class from the appropriate module
 import { OAuthProvider } from './oauth-provider.enum';
+import { Response } from 'express'; // Import Response from Express
 
 @ApiTags('auth')
 @Controller('auth')
@@ -31,12 +32,15 @@ export class AuthController {
     type: TokenDto,
   })
   @ApiResponse({ status: 401, description: 'Unauthorized.' })
-  async facebookLoginCallback(@Req() req): Promise<any> {
+    async facebookLoginCallback(@Req() req, @Res() res: Response): Promise<void> {
     // handles the Facebook OAuth2 callback
     const jwt: string = await this.authService.validateOAuthLogin(
       req.user,
       OAuthProvider.FACEBOOK,
     );
-    return { jwt };
+    // return { jwt };
+    const frontendRedirectURL = `http://localhost:3000/?token=${jwt}`;
+    res.redirect(frontendRedirectURL);
+
   }
 }

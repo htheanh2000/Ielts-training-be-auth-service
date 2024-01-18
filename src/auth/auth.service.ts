@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/services/user.service'; // Assumed service for user management
 import { OAuthProvider } from './oauth-provider.enum';
+import { log } from 'console';
 
 @Injectable()
 export class AuthService {
@@ -16,6 +17,8 @@ export class AuthService {
       // Extract necessary information from profile
       const { id, firstName, lastName, email } = profile;
 
+      console.log({profile});
+      
       // Find or create the user in your database
       // The logic here depends on how you store users and how the provider gives you the details
       // For example, if using Mongoose:
